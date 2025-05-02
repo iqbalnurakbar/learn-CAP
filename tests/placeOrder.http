@@ -1,0 +1,19 @@
+GET http://localhost:4004/browse/Books?
+
+### Test valid order
+POST http://localhost:4004/browse/submitOrder
+Content-Type: application/json
+
+{
+    "book": "4527855e-a764-4daa-a5e9-b932d22540c5",
+    "quantity": 5
+}
+
+### Test valid order
+POST http://localhost:4004/browse/restockBook
+Content-Type: application/json
+
+{
+    "book": "4527855e-a764-4daa-a5e9-b932d22540c5",
+    "quantity": 10
+}
