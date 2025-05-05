@@ -1,7 +1,8 @@
+### GET Data
 GET http://localhost:4004/browse/Books?
 
-### Test valid order
-POST http://localhost:4004/browse/submitOrder
+### Decreased Stock Item
+POST http://localhost:4004/browse/decreasedStock
 Content-Type: application/json
 
 {
@@ -9,8 +10,8 @@ Content-Type: application/json
     "quantity": 5
 }
 
-### Test valid order
-POST http://localhost:4004/browse/restockBook
+### Increased Stock Item
+POST http://localhost:4004/browse/increasedStock
 Content-Type: application/json
 
 {

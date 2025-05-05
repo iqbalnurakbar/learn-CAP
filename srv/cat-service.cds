@@ -9,11 +9,17 @@ service CatalogService @(path: '/browse') {
       author.name as authorName
     }
 
-  action submitOrder(book : Books : ID, quantity : Integer) returns {
-    stock                         : Integer
+  action decreasedStock(book : Books : ID, quantity : Integer) returns {
+    stock                            : Integer
   };
 
-  action restockBook(book : Books : ID, quantity : Integer) returns {
-    stock                         : Integer
+  action increasedStock(book : Books : ID, quantity : Integer) returns {
+    stock                            : Integer
   };
+
+  action submitOrder(book : Books : ID, quantity : Integer)    returns {
+    orderID                       : UUID;
+    status                        : String;
+    stock                         : Integer
+  }
 }
