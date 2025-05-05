@@ -5,10 +5,13 @@
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@sap/cds": "^8",
+    "better-sqlite3": "^11.9.1",
     "express": "^4",
-    "randexp": "^0.5.3"
+    "randexp": "^0.5.3",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
@@ -19,6 +22,9 @@
   },
   "cds": {
     "requires": {
+      "auth": {
+        "kind": "mocked"
+      },
       "db": {
         "kind": "sqlite",
         "credentials": {

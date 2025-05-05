@@ -80,4 +80,5 @@ type OrderStatus : String enum {
   New;
   Processed;
   Shipped;
+  Cancelled;
 }

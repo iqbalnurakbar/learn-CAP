@@ -18,3 +18,40 @@ Content-Type: application/json
     "book": "4527855e-a764-4daa-a5e9-b932d22540c5",
     "quantity": 10
 }
+
+### Submit book order
+POST http://localhost:4004/browse/submitOrder
+Content-Type: application/json
+
+{
+    "customer": "14859865-2ab6-44e9-8221-c9fb0d351db6",
+    "book": "4527855e-a764-4daa-a5e9-b932d22540c5",
+    "quantity": 10
+}
+
+### Process Order
+POST http://localhost:4004/browse/processOrder
+Content-Type: application/json
+
+{
+    "order": "22036c37-1ced-494a-8d17-65db2c7d2083"
+}
+
+### Ship Order
+POST http://localhost:4004/browse/shipOrder
+Content-Type: application/json
+
+{
+    "order": "22036c37-1ced-494a-8d17-65db2c7d2083"
+}
+
+### Cancel Order
+POST http://localhost:4004/browse/cancelOrder
+Content-Type: application/json
+
+{
+    "order": "2316d830-ef0d-4015-9d5b-73cee82a8788"
+}
+
+### Delete data
+DELETE http://localhost:4004/browse/Orders(22036c37-1ced-494a-8d17-65db2c7d2083)

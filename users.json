@@ -1,0 +1,32 @@
+{
+  "14859865-2ab6-44e9-8221-c9fb0d351db6": {
+    "id": "14859865-2ab6-44e9-8221-c9fb0d351db6",
+    "name": "James Wilson",
+    "email": "james.wilson@example.com",
+    "roles": ["authenticated-user"]
+  },
+  "2056546d-22f2-4146-bffa-5610ff0a87a2": {
+    "id": "2056546d-22f2-4146-bffa-5610ff0a87a2",
+    "name": "Lisa Thompson",
+    "email": "lisa.thompson@example.com",
+    "roles": ["authenticated-user"]
+  },
+  "20565589-05c1-4b45-9790-df1398692ef7": {
+    "id": "20565589-05c1-4b45-9790-df1398692ef7",
+    "name": "Robert Kim",
+    "email": "robert.kim@example.com",
+    "roles": ["authenticated-user"]
+  },
+  "2056563d-394f-46be-b791-47ba35b6e2da": {
+    "id": "2056563d-394f-46be-b791-47ba35b6e2da",
+    "name": "Maria Garcia",
+    "email": "maria.garcia@example.com",
+    "roles": ["authenticated-user"]
+  },
+  "2056574f-0811-4ebd-af43-b396de4a261d": {
+    "id": "2056574f-0811-4ebd-af43-b396de4a261d",
+    "name": "Thomas Lee",
+    "email": "thomas.lee@example.com",
+    "roles": ["authenticated-user"]
+  }
+}
