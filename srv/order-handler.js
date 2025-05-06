@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 export default function OrderHandler(srv) {
   srv.on("submitOrder", async (req) => {
     const { customer: customerID, book: bookID, quantity } = req.data;
-    if (!bookID || !quantity || quantity <= 0) {
-      return req.error(400, `Invalid book ID or quantity`);
+    if (!bookID || !quantity || !customerID || quantity <= 0) {
+      return req.error(400, `Invalid book ID, quantity, or customer ID!`);
     }
 
     const { Orders, OrderItems, Books, Customers } = cds.entities(
@@ -17,22 +17,28 @@ export default function OrderHandler(srv) {
 
     // let customerID = req.user?.ID;
     // console.log(req.user)
-    let existingCustomer = customerID;
+    const customer = await SELECT.one
+      .from(Customers)
+      .where({ ID: customerID })
+      .columns("ID");
+    if (!customer) return req.error(404, `Customer ${customerID} not found!`);
 
-    if (!existingCustomer) {
-      existingCustomer = uuidv4();
-      await INSERT.into(Customers).entries({
-        ID: existingCustomer,
-        name: "Test-001",
-        email: `test001@example.com`,
-        address: "N/A",
-      });
-    }
+    // if (!customer.id) {
+    //   console.log(`${customer.id} doesn't exist, create new one`)
+    //   customer.id = uuidv4();
+    //   await INSERT.into(Customers).entries({
+    //     ID: customer.id,
+    //     name: "Test-001",
+    //     email: `test001@example.com`,
+    //     address: "N/A",
+    //   });
+    // }
+
     // Insert order and get the ID
     const orderID = uuidv4();
     await INSERT.into(Orders).entries({
       ID: orderID,
-      customer: { ID: existingCustomer },
+      customer: { ID: customerID },
       status: "New",
       createdAt: new Date().toISOString(),
     });
@@ -46,12 +52,12 @@ export default function OrderHandler(srv) {
     });
 
     return {
-      existingCustomer,
+      customerID,
       orderID,
       status: "New",
       quantity: quantity,
       price: book.price,
-      message: `Order ${orderID} created for book ${bookID}!`
+      message: `Order ${orderID} created for book ${bookID}!`,
     };
   });
 
@@ -81,7 +87,7 @@ export default function OrderHandler(srv) {
     return {
       id: orderID,
       status: "Processed",
-      message: `Order ${orderID} processed. Stock updated!`
+      message: `Order ${orderID} processed. Stock updated!`,
     };
   });
 
@@ -96,7 +102,7 @@ export default function OrderHandler(srv) {
     return {
       ID: orderID,
       status: "Shipped",
-      message: `Order ${orderID} shipped!`
+      message: `Order ${orderID} shipped!`,
     };
   });
 

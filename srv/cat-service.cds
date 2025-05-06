@@ -3,17 +3,16 @@ using {bookstore.inventory.system as my} from '../db/schema';
 service CatalogService @(path: '/browse') {
 
   @readonly
-  entity Books        as
+  entity Books     as
     projection on my.Books {
       *,
       author.name as authorName
     }
 
   @cds.redirection.target
-  entity Orders       as projection on my.Orders;
+  entity Orders    as projection on my.Orders;
 
-  entity Customers    as projection on my.Customers;
-  entity OrderSummary as projection on my.OrderSummary;
+  entity Customers as projection on my.Customers;
 
 
   // @requires: 'authenticated-user'
@@ -25,7 +24,6 @@ service CatalogService @(path: '/browse') {
     stock                            : Integer
   };
 
-  // TODO: Add submitOrder, processOrder, and shipOrder Handler
   action submitOrder(customer : Customers : ID, book : Books : ID, quantity : Integer) returns {
     orderID                               : UUID;
     status                                : String;
@@ -39,5 +37,12 @@ service CatalogService @(path: '/browse') {
     orderID                         : UUID;
     status                          : String;
     message                         : String;
-  }
+  };
+
+
+  action getOrderSummary(customer : Customers : ID)                                    returns array of {
+    Customers;
+    Orders;
+  };
+
 }

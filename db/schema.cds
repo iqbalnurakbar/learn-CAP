@@ -37,7 +37,7 @@ entity Books : cuid {
 
 entity Customers : cuid {
   name    : String;
-  email   : String @assert.format: 'email';
+  email   : String;
   address : String;
   orders  : Association to many Orders
               on orders.customer = $self;
@@ -61,20 +61,6 @@ entity OrderItems : cuid {
   price    : Decimal(9, 2);
 }
 
-entity OrderSummary as
-  select from Orders {
-    ID,
-    customer.name                     as customerName,
-    status,
-    sum(items.quantity * items.price) as totalAmount : Decimal(9, 2) @assert.range: [
-                                                         1,
-                                                         null
-                                                       ]
-  }
-  group by
-    ID,
-    customer.name,
-    status;
 
 type OrderStatus : String enum {
   New;
